@@ -1,8 +1,18 @@
-import { app, BrowserWindow, protocol } from 'electron';
+import { app, BrowserWindow, protocol, ipcMain } from 'electron';
 import path from 'path';
 import url from 'url';
 import isDev from 'electron-is-dev';
 import { runJar, connectSsh } from './backendCommand';
+
+// ipcMain.handle('ipc-example', async (event, arg) => {
+//   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
+//   console.log(msgTemplate(arg));
+// });
+
+ipcMain.handle('ipc-example', (event, arg) => {
+  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
+  console.log(msgTemplate(arg));
+});
 
 function createWindow() {
   const window = new BrowserWindow({

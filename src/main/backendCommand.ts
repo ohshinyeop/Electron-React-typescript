@@ -39,8 +39,3 @@ export const connectSsh = () => {
       });
     });
 };
-
-module.exports = {
-  runJar,
-  connectSsh,
-};
