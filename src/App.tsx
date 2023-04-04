@@ -5,7 +5,7 @@ import appRuntime from './ipc/appRuntime';
 
 function App() {
   const sendMail = () => {
-    appRuntime.invoke('ipc-example', {});
+    appRuntime.invoke('connectSsh', {});
   };
 
   return (

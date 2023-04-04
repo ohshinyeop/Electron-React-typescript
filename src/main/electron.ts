@@ -9,9 +9,8 @@ import { runJar, connectSsh } from './backendCommand';
 //   console.log(msgTemplate(arg));
 // });
 
-ipcMain.handle('ipc-example', (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
+ipcMain.handle('connectSsh', (event, arg) => {
+  connectSsh();
 });
 
 function createWindow() {
@@ -45,7 +44,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   console.log('app.whenReady js');
-  connectSsh();
   protocol.interceptFileProtocol('file', (request, callback) => {
     const url = request.url.substr(7); /* all urls start with 'file://' */
     const filePath = isDev
