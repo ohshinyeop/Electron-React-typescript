@@ -1,14 +1,10 @@
-# Electron React boilerplate with jar
+# Electron React typeScript boilerplate with jar
 
 # install
 yarn install
 
 # run
-1. yarn react-start
-2. yarn electron-start
-
-# run concurrently
-yarn start
+1. yarn dev
 
 # build
 1. mac(arm) : bundle:osx-arm
