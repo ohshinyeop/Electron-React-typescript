@@ -1,9 +1,9 @@
-import { exec } from "child_process";
-import { NodeSSH } from "node-ssh";
+import { exec } from 'child_process';
+import { NodeSSH } from 'node-ssh';
 
 export const runJar = () => {
-  console.log("Running jar");
-  const server = "./example.jar";
+  console.log('Running jar');
+  const server = './example.jar';
   const serverProcess = exec(
     `java -jar ${server} output.log`,
     function (error, stdout, stderr) {
@@ -18,7 +18,7 @@ export const runJar = () => {
   if (serverProcess.pid) {
     console.log(`Server PID: ${serverProcess.pid}`);
   } else {
-    console.log("Failed to launch server process.");
+    console.log('Failed to launch server process.');
   }
 };
 
@@ -26,16 +26,16 @@ export const connectSsh = () => {
   const ssh = new NodeSSH();
   ssh
     .connect({
-      host: "192.168.0.75",
-      username: "bitnine32",
+      host: '192.168.0.75',
+      username: 'bitnine32',
       port: 22,
-      password: "32bihdyggsetj3!",
+      password: '32bihdyggsetj3!',
       readyTimeout: 5000,
     })
     .then(() => {
-      ssh.execCommand("ifconfig", {}).then((result) => {
-        console.log("STDOUT: " + result.stdout);
-        console.log("STDERR: " + result.stderr);
+      ssh.execCommand('ifconfig', {}).then((result) => {
+        console.log('STDOUT: ' + result.stdout);
+        console.log('STDERR: ' + result.stderr);
       });
     });
 };

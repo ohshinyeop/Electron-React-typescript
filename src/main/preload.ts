@@ -1,7 +1,7 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer } from 'electron';
 export {};
 
-contextBridge.exposeInMainWorld("appRuntime", {
+contextBridge.exposeInMainWorld('appRuntime', {
   send: (channel: string, data: any) => {
     ipcRenderer.send(channel, data);
   },

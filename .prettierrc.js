@@ -1,4 +1,3 @@
-// .prettierrc.js
 const { getAllJSDocTagsOfKind } = require('typescript');
 
 module.exports = {
