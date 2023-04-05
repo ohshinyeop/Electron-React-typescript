@@ -2,16 +2,7 @@ import { app, BrowserWindow, protocol, ipcMain } from 'electron';
 import path from 'path';
 import url from 'url';
 import isDev from 'electron-is-dev';
-import { runJar, connectSsh } from './backendCommand';
-
-// ipcMain.handle('ipc-example', async (event, arg) => {
-//   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-//   console.log(msgTemplate(arg));
-// });
-
-ipcMain.handle('connectSsh', (event, arg) => {
-  connectSsh();
-});
+import { init } from './controller/mainController';
 
 function createWindow() {
   const window = new BrowserWindow({
@@ -25,7 +16,6 @@ function createWindow() {
     },
   });
 
-  console.log('isDev', isDev);
   if (isDev) {
     window.loadURL('http://localhost:3000');
   } else {
@@ -43,7 +33,6 @@ function createWindow() {
 // app.on("ready", createWindow);
 
 app.whenReady().then(() => {
-  console.log('app.whenReady js');
   protocol.interceptFileProtocol('file', (request, callback) => {
     const url = request.url.substr(7); /* all urls start with 'file://' */
     const filePath = isDev
@@ -52,4 +41,5 @@ app.whenReady().then(() => {
     callback({ path: path.normalize(`${filePath}`) });
   });
   createWindow();
+  init();
 });
