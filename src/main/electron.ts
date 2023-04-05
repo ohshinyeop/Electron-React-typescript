@@ -15,6 +15,7 @@ function createWindow() {
       webviewTag: true,
     },
   });
+  window.webContents.openDevTools();
 
   if (isDev) {
     window.loadURL('http://localhost:3000');

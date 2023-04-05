@@ -1,12 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import appRuntime from './ipc/appRuntime';
+import { ipcRenderer } from 'electron';
 
 function App() {
-  const connectSsh = () => {
-    appRuntime.invoke('connectSsh', {});
+  const connectSsh = async () => {
+    appRuntime.send('connectSsh', {});
   };
+  appRuntime.on('connectSsh-result', (event, res) => {
+    console.log(res);
+  });
 
   return (
     <div className="App">

@@ -6,6 +6,7 @@ interface AppRuntime {
   send: (channel: string, payload: any) => void;
   subscribe: (channel: string, listener: Listener) => Unsubscribe;
   invoke: (channel: string, payload: any) => Promise<any>;
+  on: (channel: string, payload: any) => Promise<any>;
 }
 
 const appRuntime = (window as any).appRuntime as AppRuntime;

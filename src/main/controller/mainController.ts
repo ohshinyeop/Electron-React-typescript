@@ -2,7 +2,8 @@ import { ipcMain } from 'electron';
 import { runJar, connectSsh } from '../service/mainService';
 
 export const init = () => {
-  ipcMain.handle('connectSsh', (event, arg) => {
-    connectSsh();
+  ipcMain.on('connectSsh', async (event, arg) => {
+    const result = await connectSsh();
+    event.sender.send('connectSsh-result', result);
   });
 };

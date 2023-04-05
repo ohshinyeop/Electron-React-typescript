@@ -22,20 +22,21 @@ export const runJar = () => {
   }
 };
 
-export const connectSsh = () => {
+export const connectSsh = async () => {
   const ssh = new NodeSSH();
-  ssh
-    .connect({
-      host: '192.168.0.75',
-      username: 'bitnine32',
-      port: 22,
-      password: '32bihdyggsetj3!',
-      readyTimeout: 5000,
-    })
-    .then(() => {
-      ssh.execCommand('ifconfig', {}).then((result) => {
-        console.log('STDOUT: ' + result.stdout);
-        console.log('STDERR: ' + result.stderr);
-      });
-    });
+  await ssh.connect({
+    host: '192.168.0.75',
+    username: '12345',
+    port: 22,
+    password: '12345!',
+    readyTimeout: 5000,
+  });
+
+  const result = await ssh.execCommand('ifconfig', {}).then(async (result) => {
+    console.log('STDOUT: ' + result.stdout);
+    console.log('STDERR: ' + result.stderr);
+    return result.stdout;
+  });
+
+  return result;
 };

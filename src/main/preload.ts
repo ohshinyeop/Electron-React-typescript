@@ -15,4 +15,7 @@ contextBridge.exposeInMainWorld('appRuntime', {
   invoke: (channel: string, data: any) => {
     return ipcRenderer.invoke(channel, data);
   },
+  on: (channel: string, listener: any) => {
+    ipcRenderer.on(channel, listener);
+  },
 });

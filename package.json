@@ -30,39 +30,29 @@
     "react-eject": "react-scripts eject",
     "start-renderer": "cross-env BROWSER=none yarn react-start",
     "postinstall": "electron-builder install-app-deps",
-    "start-main": "electron ./dist/electron.js",
+    "start-main": "electron ./build/electron.js",
     "compile-main": "tsc",
     "start-main-after-renderer": "wait-on http://localhost:3000 && yarn start-main",
     "dev": "yarn compile-main && concurrently -n renderer, main 'npm:start-renderer' 'npm:start-main-after-renderer'",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "prebundle": "cp -r ./dist/electron.js ./dist/backendCommand.js ./dist/preload.js build",
-    "bundle:osx-arm": "yarn run build && yarn compile-main  && yarn prebundle && electron-builder build -c.extraMetadata.main=build/electron.js --mac",
-    "bundle:osx-64": "yarn run build && yarn compile-main  && yarn prebundle && electron-builder build -c.extraMetadata.main=build/electron.js --mac --x64",
-    "bundle:win-64": "yarn run build && yarn compile-main  && yarn prebundle && electron-builder build -c.extraMetadata.main=build/electron.js --win --x64"
+    "bundle:osx-arm": "yarn run build && yarn compile-main && electron-builder build -c.extraMetadata.main=build/electron.js --mac",
+    "bundle:osx-64": "yarn run build && yarn compile-main && electron-builder build -c.extraMetadata.main=build/electron.js --mac --x64",
+    "bundle:win-64": "yarn run build && yarn compile-main && electron-builder build -c.extraMetadata.main=build/electron.js --win --x64"
   },
   "build": {
-    "appId": "example.electron-react-with-jar",
-    "productName": "example-electron-react-with-jar",
+    "appId": "net.bitnine.AEM-Migrator",
+    "productName": "AEM-Migrator",
     "extraResources": [
-      {
-        "from": "models",
-        "to": "models",
-        "filter": [
-          "**/*"
-        ]
-      },
-      {
-        "from": "cache",
-        "to": "cache",
-        "filter": [
-          "**/*"
-        ]
-      }
+
     ],
     "mac": {
       "icon": "build/logo512.png"
     },
     "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
       "icon": "build/logo512.png"
     }
   },
