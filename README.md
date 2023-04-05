@@ -1,4 +1,4 @@
-# Electron React typeScript boilerplate with jar
+# Electron / React / typeScript / IPC boilerplate
 
 # install
 yarn install
